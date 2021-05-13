@@ -11,9 +11,6 @@ app.set("view engine", "ejs")
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 
-res.statusCode = 200;
-res.setHeader('Content-Type', 'text/html');
-
 const todoTasks = { 
   user: {
     todo: {}
