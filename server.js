@@ -2,7 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-const PORT = 8080;
+const port = process.env.PORT || 3000
 
 const app = express();
 
@@ -41,14 +41,12 @@ app.post("/:taskVar/delete", (req, res) => {
 
 app.post("/:completedVar/complete", (req, res) => {
   let completedTasksLength = Object.keys(completedTasks).length;
-  console.log(req.params)
   completedTasks[`task${completedTasksLength}`] = {
     taskName: todoTasks["user"]["todo"][req.params.completedVar]["taskName"],
     taskDesc: todoTasks["user"]["todo"][req.params.completedVar]["taskDesc"],
     poms: todoTasks["user"]["todo"][req.params.completedVar]["poms"]
   }
   delete todoTasks["user"]["todo"][req.params.completedVar];
-  console.log(completedTasks)
   res.redirect("/")
 })
 
@@ -57,6 +55,6 @@ app.post("/:taskVar/deleteComplete", (req, res) => {
   res.redirect("/")
 })
 
-app.listen(PORT, () => {
+app.listen(port, () => {
   console.log(`Server Listening on Port: ${PORT}`)
 })
